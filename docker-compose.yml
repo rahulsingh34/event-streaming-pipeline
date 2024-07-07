@@ -22,7 +22,7 @@ services:
       - "2181:2181"
 
   kafka:
-    image: wurstmeister/kafka:2.13-2.7.0
+    image: confluentinc/cp-kafka:7.6.1
     ports:
       - "9092:9092"
     environment:
