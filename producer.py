@@ -14,11 +14,13 @@ def data_generator():
 
 # Create producer
 producer = KafkaProducer(
-    bootstrap_servers='localhost:9092', 
-    value_serializer=lambda v: json.dumps(v).encode('utf-8')
+    bootstrap_servers = 'localhost:9092', 
+    value_serializer = lambda v: json.dumps(v).encode('utf-8')
 )
 
 # Send random data every second
 while True:
-    producer.send('listening-activity', data_generator())
+    activity = data_generator()
+    producer.send('listening-activity', activity)
+    print(activity)
     time.sleep(1)
