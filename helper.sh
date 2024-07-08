@@ -13,5 +13,5 @@ ls /usr/bin | grep kafka
 # Produce message
 /usr/bin/kafka-console-producer --topic test-topic --bootstrap-server localhost:9092
 
-# Consume message
-/usr/bin/kafka-console-consumer --topic test-topic --bootstrap-server localhost:9092
+# Consume messages from beginning
+/usr/bin/kafka-console-consumer --topic test-topic --bootstrap-server localhost:9092 --from-beginning
