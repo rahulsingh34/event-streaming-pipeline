@@ -1,6 +1,6 @@
 # Kafka ETL Pipeline
 
-Designed a streaming data pipeline with Kafka.
+Designed a streaming data pipeline with simulated event data.
 
 ### Overview
 - Simulated data for user events on a music application
