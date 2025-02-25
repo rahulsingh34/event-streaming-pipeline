@@ -52,9 +52,9 @@ services:
     image: postgres:13
     platform: linux/arm64/v8
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydatabase
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
