@@ -1,4 +1,4 @@
-# Kafka ETL Pipeline
+# Kafka ETL Pipeline (REWORK INP!)
 
 Designed a streaming data pipeline with simulated event data.
 
