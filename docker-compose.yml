@@ -37,5 +37,29 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
+  flink-jobmanager:
+    image: apache/flink:1.17.0
+    environment:
+      - FLINK_PROPERTIES=jobmanager.rpc.address=flink-jobmanager
+    ports:
+      - "8081:8081"
+    restart: always
+    depends_on:
+      - kafka
+    networks:
+      - flink-network
+
+  flink-taskmanager:
+    image: apache/flink:1.17.0
+    depends_on:
+      - flink-jobmanager
+    restart: always
+    networks:
+      - flink-network
+
 volumes:
   postgres_data:
+
+networks:
+  flink-network:
+    driver: bridge
