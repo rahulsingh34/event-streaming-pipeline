@@ -1,16 +1,17 @@
-# Kafka ETL Pipeline (REWORK INP!)
+# Event Streaming Pipeline (REWORK INP!)
 
 Designed a streaming data pipeline with simulated event data.
 
 ### Overview
-- Simulated data for user events on a music application
-- Utilized Kafka to process the data
-- Consumed the data and used Postgres as the sink
+- Simulated a datastream using Kafka for user events on a music application
+- Utilized Flink to process the data and add geolocation enrichment using an API
+- Consumed the data, using Postgres as the sink
 
 ### Diagram
 ![diagram](diagram.png)
 
 ### Tools & Technologies
 - Docker
+- Flink
 - Kafka
 - PostgreSQL
