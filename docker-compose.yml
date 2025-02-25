@@ -1,25 +1,13 @@
 services:
-  postgres:
-    image: postgres:13
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD", "pg_isready", "-U", "postgres"]
-      interval: 10s
-      retries: 5
-      start_period: 5s
-    restart: always
-
   zookeeper:
     image: zookeeper:3.6.3
+    platform: linux/arm64/v8
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
     ports:
       - "2181:2181"
+    networks:
+      - flink-net
 
   kafka:
     image: confluentinc/cp-kafka:7.6.1
@@ -34,32 +22,47 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
     depends_on:
       - zookeeper
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - flink-net
 
+ # Flink JobManager
   flink-jobmanager:
-    image: apache/flink:1.17.0
+    image: flink:2.0-preview1
+    platform: linux/arm64/v8
     environment:
-      - FLINK_PROPERTIES=jobmanager.rpc.address=flink-jobmanager
+      - JOB_MANAGER_RPC_ADDRESS=flink-jobmanager
+    command: jobmanager
+    networks:
+      - flink-net
     ports:
-      - "8081:8081"
-    restart: always
-    depends_on:
-      - kafka
-    networks:
-      - flink-network
+      - "8081:8081"  # Flink Web UI for monitoring
 
+  # Flink TaskManager
   flink-taskmanager:
-    image: apache/flink:1.17.0
-    depends_on:
-      - flink-jobmanager
-    restart: always
+    image: flink:2.0-preview1
+    platform: linux/arm64/v8
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=flink-jobmanager
+    command: taskmanager
     networks:
-      - flink-network
+      - flink-net
 
-volumes:
-  postgres_data:
+  # Postgres Service
+  postgres:
+    image: postgres:13
+    platform: linux/arm64/v8
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - flink-net
 
 networks:
-  flink-network:
+  flink-net:
     driver: bridge
+
+volumes:
+  pgdata:
