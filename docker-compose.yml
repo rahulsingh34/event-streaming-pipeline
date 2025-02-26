@@ -25,7 +25,6 @@ services:
     networks:
       - flink-net
 
- # Flink JobManager
   flink-jobmanager:
     image: flink:2.0-preview1
     platform: linux/arm64/v8
@@ -35,9 +34,8 @@ services:
     networks:
       - flink-net
     ports:
-      - "8081:8081"  # Flink Web UI for monitoring
+      - "8081:8081" 
 
-  # Flink TaskManager
   flink-taskmanager:
     image: flink:2.0-preview1
     platform: linux/arm64/v8
