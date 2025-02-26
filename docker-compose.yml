@@ -45,7 +45,6 @@ services:
     networks:
       - flink-net
 
-  # Postgres Service
   postgres:
     image: postgres:13
     platform: linux/arm64/v8
