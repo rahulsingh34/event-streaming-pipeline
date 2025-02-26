@@ -28,7 +28,13 @@ services:
   flink-jobmanager:
     image: flink:2.0-preview1
     platform: linux/arm64/v8
+    env_file:
+      - flink-env.env
     environment:
+      - POSTGRES_URL=${POSTGRES_URL:-jdbc:postgresql://host.docker.internal:5432/postgres}
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-postgres}
       - JOB_MANAGER_RPC_ADDRESS=flink-jobmanager
     command: jobmanager
     networks:
