@@ -15,3 +15,6 @@ ls /usr/bin | grep kafka
 
 # Consume messages from beginning
 /usr/bin/kafka-console-consumer --topic test-topic --bootstrap-server localhost:9092 --from-beginning
+
+# Run a job
+docker compose exec jobmanager ./bin/flink run -py /opt/jobs/<job.py>
