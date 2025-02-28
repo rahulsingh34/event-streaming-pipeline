@@ -12,6 +12,7 @@ Designed a streaming data pipeline with simulated event data.
 
 ### Tools & Technologies
 - Docker
-- Flink
 - Kafka
+- Flink
+- REST APIs
 - PostgreSQL
