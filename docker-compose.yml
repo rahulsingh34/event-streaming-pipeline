@@ -1,6 +1,8 @@
 services:
   jobmanager:
     image: pyflink/playgrounds:1.13.0-rc2
+    env_file:
+      - flink-env.env
     volumes:
       - ./jobs:/opt/jobs
     hostname: "jobmanager"
@@ -13,6 +15,8 @@ services:
       - JOB_MANAGER_RPC_ADDRESS=jobmanager
   taskmanager:
     image: pyflink/playgrounds:1.13.0-rc2
+    env_file:
+      - flink-env.env
     volumes:
       - ./jobs:/opt/jobs
     expose:
