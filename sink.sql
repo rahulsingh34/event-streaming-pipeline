@@ -3,5 +3,6 @@ CREATE TABLE listening_activity (
     activity TEXT,
     event_timestamp INT,
     ip_address TEXT,
+    geodata TEXT,
     PRIMARY KEY (user_id, activity, event_timestamp, ip_address)
 );
