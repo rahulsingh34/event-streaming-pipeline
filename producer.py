@@ -21,7 +21,7 @@ def data_generator():
     return {
         'user_id': random.randint(1000, 9999),
         'activity': random.choice(events),
-        'timestamp': int(time.time()),
+        'event_timestamp': int(time.time()),
         'ip_address': random.choice(ip_addresses)
     }
 
