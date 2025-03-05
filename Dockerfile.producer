@@ -1,0 +1,14 @@
+# Use Python 3.9 as the base image
+FROM python:3.9-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the Python script into the container
+COPY producer.py /app/producer.py
+
+# Install required dependencies
+RUN pip install kafka-python
+
+# Command to run the Kafka producer script
+CMD ["python", "producer.py"]
