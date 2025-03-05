@@ -12,12 +12,12 @@ conn = psycopg2.connect(
 
 # Create table if it doesn't exist
 cursor = conn.cursor()
-cursor.execute("CREATE TABLE IF NOT EXISTS listening_activity (user_id INT, activity TEXT, timestamp INT)")
+cursor.execute("CREATE TABLE IF NOT EXISTS listening_activity1 (user_id INT, activity TEXT, event_timestamp INT)")
 conn.commit()
 
 # Function to insert activity data into PostgreSQL
 def insert_activity_data(activity):
-    cursor.execute("INSERT INTO listening_activity (user_id, activity, timestamp) VALUES (%s, %s, %s)", (activity['user_id'], activity['activity'], activity['timestamp']))
+    cursor.execute("INSERT INTO listening_activity1 (user_id, activity, event_timestamp) VALUES (%s, %s, %s)", (activity['user_id'], activity['activity'], activity['event_timestamp']))
     conn.commit()
 
 # Create consumer
