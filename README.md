@@ -1,4 +1,4 @@
-# Event Streaming Pipeline
+# Music App Event Streaming Pipeline
 
 Designed a streaming data pipeline with simulated event data.
 
